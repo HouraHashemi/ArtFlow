@@ -39,15 +39,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'debug_toolbar'
+    'debug_toolbar',
     'rest_framework',
-    'rest_framework_swagger',
+    # 'drf_yasg',
+    # 'rest_framework_swagger',
 
-    'Users',
-    'Artworks',
-    'Auctions',
-    'Orders',
+    # 'Users',
+    # 'Artworks',
+    # 'Auctions',
+    # 'Orders',
 ]
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic'
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
