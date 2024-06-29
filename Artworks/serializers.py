@@ -10,7 +10,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ArtworkSerializer(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True, read_only=True)
+    # categories = CategorySerializer()
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
     class Meta:
         model = Artwork
-        fields = ['id', 'artist', 'title', 'description', 'image', 'price', 'categories', 'created_at']
+        fields = ['id', 'artist', 'title', 'description', 'image', 'floor_price', 'created_at', 'selling_state', 'floor_price', 'categories']
+
+

@@ -12,10 +12,10 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('api-auth/', include('rest_framework.urls')),
     
-    path('users-api/', include('Users.urls')), 
-    path('artworks-api/', include('Artworks.urls')), 
-    path('orders-api/', include('Orders.urls')), 
-    path('auctions-api/', include('Auctions.urls')), 
+    # path('users/', include('Users.urls')), 
+    path('artworks/', include('Artworks.urls')), 
+    # path('orders/', include('Orders.urls')), 
+    # path('auctions/', include('Auctions.urls')), 
 
     # url(r'^$', schema_view)
 

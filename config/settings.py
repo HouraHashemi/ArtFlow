@@ -156,3 +156,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # AUTH_USER_MODEL = "Users.User" 
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False
+}
