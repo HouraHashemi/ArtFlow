@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     # 'drf_yasg',
     # 'rest_framework_swagger',
 
-    # 'Users',
-    # 'Artworks',
+    'Users',
+    'Artworks',
     # 'Auctions',
     # 'Orders',
 ]
@@ -153,3 +153,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# AUTH_USER_MODEL = "Users.User" 
