@@ -8,16 +8,29 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return "{}".format(self.name)
+    
+
+class ArtworkSize(models.Model):
+    hight = models.PositiveIntegerField()
+    width = models.PositiveIntegerField()
+    depth = models.PositiveIntegerField()
+
+    def __str__(self) -> str:
+        return "{}x{}x{}".format(self.width, self.hight, self.depth)
+
 
 
 class Artwork(models.Model):
     artist = models.CharField(max_length=100)
     title = models.CharField(max_length=255)
+    size = models.CharField(max_length=255, null=True)
+    # size = models.ForeignKey('ArtworkSize',on_delete=models.CASCADE, default=ArtworkSize(0,0,0))
+
     description = models.TextField(max_length=500)
     image = models.ImageField(upload_to='artworks/', blank=True, null=True)
     categories = models.ManyToManyField(Category, related_name='categories')
     created_at = models.DateTimeField(default=timezone.now)
-    size = models.CharField(max_length=50, blank=True, null=True)
+    
     SELLING_STATES = [
         ('not_sold', 'not_sold'),
         ('on_auction', 'on_auction'),
