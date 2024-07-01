@@ -14,8 +14,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+
     
-    # path('users/', include('Users.urls')), 
+    path('users/', include('Users.urls')), 
     path('artworks/', include('Artworks.urls')), 
     # path('orders/', include('Orders.urls')), 
     # path('auctions/', include('Auctions.urls')), 
