@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "Users.User" 
 
 # Application definition
 
@@ -45,10 +46,11 @@ INSTALLED_APPS = [
     # 'drf_yasg',
     # 'rest_framework_swagger',
 
-    'Users',
     'Artworks',
     # 'Auctions',
     # 'Orders',
+    'Users',
+
 ]
 
 SWAGGER_SETTINGS = {
@@ -156,7 +158,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-# AUTH_USER_MODEL = "Users.User" 
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False

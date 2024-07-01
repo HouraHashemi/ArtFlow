@@ -1,7 +1,7 @@
 # artwork/models.py
 from django.db import models
 from django.utils import timezone
-
+from django.conf import settings
 class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -39,7 +39,7 @@ class Artwork(models.Model):
     ]
     selling_state = models.CharField(max_length=100,choices=SELLING_STATES, default='not_sold')  # Provide default value
     floor_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    # owner = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     # auction_id = models.CharField(max_length=100)
 
