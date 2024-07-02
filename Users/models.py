@@ -2,14 +2,16 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from django.contrib import admin
+from Artworks.models import Artwork
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
-    # is_artist = models.BooleanField(default=False)
+    # artistic_name 
 
 
 class Customer(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user_artwork = models.ManyToManyField(Artwork, related_name='user_artwork')
 
     # Profile
     bio = models.TextField(blank=True, null=True)
@@ -22,6 +24,9 @@ class Customer(models.Model):
     @admin.display(ordering='user__last_name')
     def last_name(self):
         return self.user.last_name
+    
+    # collected_artwork = models.ManyToManyField(Artwork, related_name='collected_artwork')
+    # auction_artwork = models.ManyToManyField(Artwork, related_name='auction_artwork')
     
 
     class Meta:

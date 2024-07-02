@@ -3,17 +3,30 @@ from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateMo
 from rest_framework.viewsets import GenericViewSet
 from .models import Customer
 from .serializers import CustomerSerializer
+from rest_framework import viewsets
 
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
+# from Users.permissions import FullDjangoModelPermissions
 
 # Create your views here.
-class CustomerViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
+class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    
 
-    @action(detail=False, methods=['GET', 'PUT'])
+    # permission_classes = [FullDjangoModelPermissions]
+    permission_classes = [DjangoModelPermissions]
+    # permission_classes = [IsAdminUser]
+
+    # overwriting the permission_classes
+    # def get_permissions(self):
+    #     if self.request.method == 'GET':
+    #         return [AllowAny()]
+    #     return [IsAuthenticated()]
+    
+    # adding url that inherit all the actions and overwrite them
+    @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
     def me(self, request):
         (customer, created) = Customer.objects.get_or_create(user_id=request.user.id)
         if request.method == 'GET':
@@ -24,3 +37,4 @@ class CustomerViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, Ge
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
+

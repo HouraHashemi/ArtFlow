@@ -21,7 +21,7 @@ class ArtworkSize(models.Model):
 
 
 class Artwork(models.Model):
-    artist = models.CharField(max_length=100)
+    artist = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     size = models.CharField(max_length=255, null=True)
     # size = models.ForeignKey('ArtworkSize',on_delete=models.CASCADE, default=ArtworkSize(0,0,0))
@@ -39,7 +39,6 @@ class Artwork(models.Model):
     ]
     selling_state = models.CharField(max_length=100,choices=SELLING_STATES, default='not_sold')  # Provide default value
     floor_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     # auction_id = models.CharField(max_length=100)
 
