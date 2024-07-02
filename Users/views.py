@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
-# from Users.permissions import FullDjangoModelPermissions
+from Users.permissions import ViewCustomerChangeArtworkPermission, FullDjangoModelPermissions
 
 # Create your views here.
 class CustomerViewSet(viewsets.ModelViewSet):
@@ -37,4 +37,13 @@ class CustomerViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
+    
+    
+    @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
+    def add_artwork(self, request):
+        pass
 
+
+    @action(detail=True, permission_classes=[ViewCustomerChangeArtworkPermission])
+    def change_artwork(self, request, pk):
+        return Response("ok")

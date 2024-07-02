@@ -32,7 +32,8 @@ class Customer(models.Model):
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
         permissions = [
-            ('allow_bidding', 'Allow Bidding on an Art')
+            ('allow_add_artwork', 'Can add new Artwork'),
+            ('allow_change_artwork', 'Can change existed Artwork')
         ]
 
     def __str__(self):
