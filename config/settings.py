@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'djoser',
-    # 'drf_yasg',
-    # 'rest_framework_swagger',
+    'drf_yasg',
 
     'Artworks',
     # 'Auctions',
@@ -55,6 +54,7 @@ INSTALLED_APPS = [
 
 ]
 
+
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'Basic': {
@@ -62,6 +62,7 @@ SWAGGER_SETTINGS = {
         }
     }
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
