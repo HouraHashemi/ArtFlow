@@ -19,6 +19,12 @@ class UserSerializer(BaseUserSerializer):
 
 class CustomerSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(read_only=True)
+
+    # def create(self, validated_data):
+    #     u_id = self.context['u_id']
+    #     return Customer.objects.create(u_id)
+        
+
     # user_artwork = CustomerArtworkSerializer(many=True)
     class Meta:
         model = Customer

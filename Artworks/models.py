@@ -2,6 +2,10 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.contrib import admin
+from .validators import validate_file_size
+
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -27,7 +31,7 @@ class Artwork(models.Model):
     # size = models.ForeignKey('ArtworkSize',on_delete=models.CASCADE, default=ArtworkSize(0,0,0))
 
     description = models.TextField(max_length=500)
-    image = models.ImageField(upload_to='artworks/', blank=True, null=True)
+    image = models.ImageField(upload_to='artworks/', blank=True, null=True, validators=[validate_file_size])
     categories = models.ManyToManyField(Category, related_name='categories')
     created_at = models.DateTimeField(default=timezone.now)
     
@@ -41,7 +45,6 @@ class Artwork(models.Model):
     floor_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     # auction_id = models.CharField(max_length=100)
-
 
     def __str__(self) -> str:
         return "{}".format(self.title)

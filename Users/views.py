@@ -38,9 +38,13 @@ class CustomerViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data)
     
+
+    # def get_serializer_context(self):
+    #     return {'u_id': self.kwargs['u_pk']}
     
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
     def add_artwork(self, request):
+        # Customer.objects.get(user_id=self.kwargs['u_pk'])
         pass
 
 
