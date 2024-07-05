@@ -15,3 +15,6 @@ class OrderItem(models.Model):
     artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     auction = models.ForeignKey(Auction, related_name='auction')
+
+
+# transactions

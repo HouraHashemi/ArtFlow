@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.contrib import admin
 from .validators import validate_file_size
-
+from django.core.validators import MinValueValidator
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -42,10 +42,14 @@ class Artwork(models.Model):
         ('sold_out', 'sold_out'),
     ]
     selling_state = models.CharField(max_length=100,choices=SELLING_STATES, default='not_sold')  # Provide default value
-    floor_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    floor_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[MinValueValidator(1, message='can not sell for free')])
 
     # auction_id = models.CharField(max_length=100)
 
     def __str__(self) -> str:
         return "{}".format(self.title)
+    
+
+    class Meta:
+        ordering = ['artist']
 
