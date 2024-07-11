@@ -15,7 +15,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    
+    list_display = ['id', 'username', 'email', 'first_name', 'last_name', 'is_staff']
     add_fieldsets = (
         (
             None,
@@ -32,7 +32,7 @@ class UserAdmin(BaseUserAdmin):
 class CustomerAdmin(admin.ModelAdmin):
 
     # needs functions in model to recognize these
-    list_display = ['user','first_name', 'last_name', 'bio', 'group', 'user_artworks_count']
+    list_display = ['user_id', 'user','first_name', 'last_name', 'bio', 'group', 'user_artworks_count']
     list_select_related = ['user']
 
     ordering = ['user__first_name', 'user__last_name']

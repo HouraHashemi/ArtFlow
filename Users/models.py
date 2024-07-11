@@ -21,13 +21,14 @@ class Customer(models.Model):
     bio = models.TextField(blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
+
     @admin.display(ordering='user__first_name')
     def first_name(self):
         return self.user.first_name
     @admin.display(ordering='user__last_name')
     def last_name(self):
         return self.user.last_name
-        
+    
 
     class Meta:
         ordering = ['user__first_name', 'user__last_name']

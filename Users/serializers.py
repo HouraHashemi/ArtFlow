@@ -2,7 +2,8 @@ from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
 from djoser.serializers import UserSerializer as BaseUserSerializer
 from rest_framework import serializers
 from .models import Customer
-from Artworks.serializers import CustomerArtworkSerializer
+from Artworks.serializers import ArtworkSerializer, SimpleArtworkSerializer
+from Artworks.models import Artwork
 
 
 
@@ -19,15 +20,12 @@ class UserSerializer(BaseUserSerializer):
 
 class CustomerSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(read_only=True)
-
-    # def create(self, validated_data):
-    #     u_id = self.context['u_id']
-    #     return Customer.objects.create(u_id)
-        
-
-    # user_artwork = CustomerArtworkSerializer(many=True)
+    user_artworks = SimpleArtworkSerializer(many=True, read_only=True)
     class Meta:
         model = Customer
-        fields = ['id', 'user_id', 'bio']
-        # fields = ['id', 'user_id', 'bio', 'user_artwork']
+        fields = ['id', 'user_id', 'bio', 'user_artworks', ]
+
+
+
+
 

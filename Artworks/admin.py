@@ -21,7 +21,7 @@ admin.site.index_title = 'Admin Panel'
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
     actions = ['back_selling_state_to_defaulte']
-    list_display = ['title', 'artist', 'image_thumb', 'selling_state_mode', 'floor_price', 'categories_type']
+    list_display = ['id','title', 'image_thumb', 'selling_state_mode', 'floor_price', 'categories_type']
     list_editable = ['floor_price']
     list_per_page = 10 
     list_select_related = ['artist']

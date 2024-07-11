@@ -8,7 +8,17 @@ class ArtworkSerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
     class Meta:
         model = Artwork
-        fields = ['id', 'artist' ,'title', 'description', 'image', 'floor_price', 'created_at', 'selling_state', 'floor_price', 'categories']
+        fields = ['id', 'artist' ,'title', 'description', 'image', 'floor_price', 'created_at', 'selling_state', 'categories']
+        read_only_fields = ['artist']  # Ensure artist field is read-only
+
+
+class SimpleArtworkSerializer(serializers.ModelSerializer):
+    # categories = CategorySerializer()
+    class Meta:
+        model = Artwork
+        fields = ['id', 'artist' ,'title', 'image',]
+        read_only_fields = ['artist']  # Ensure artist field is read-only
+
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -18,7 +28,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class CustomerArtworkSerializer(serializers.ModelSerializer):
-    # artist = Artwork.objects.
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
     class Meta:
         model = Artwork
-        fields = ['id' , 'artist', 'title']
+        fields = ['id', 'artist' ,'title', 'description', 'image', 'floor_price', 'created_at', 'selling_state', 'floor_price', 'categories']
+        read_only_fields = ['artist']  # Ensure artist field is read-only
