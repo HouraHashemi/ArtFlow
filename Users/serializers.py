@@ -26,7 +26,6 @@ class UserSerializer(BaseUserSerializer):
                          'last_name']
 
 
-
 class CustomerSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(read_only=True)
     user_artworks = SimpleArtworkSerializer(many=True, read_only=True)

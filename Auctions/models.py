@@ -1,16 +1,27 @@
 from django.db import models
+from Artworks.models import Artwork
+from django.utils import timezone
+from django.conf import settings
 
-# Create your models here.
+
+
+class Bid(models.Model):
+    artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE)
+    bidder = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    data = models.DateTimeField(default=timezone.now)
+    bid_price = models.PositiveIntegerField(default=0)
+    is_valid = models.BooleanField(default=False)
+
+
+
 class Auction(models.Model):
-    #     id = models.CharField(primary_key=True, default=generate_random_id, max_length=6, unique=True)
+    artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE)
+    bids = models.ManyToManyField(Bid, related_name='bids')
+    start_time = models.DateTimeField(default=timezone.now)
+    end_time = models.DateTimeField(default=timezone.now)
+    collector = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    # def save(self, *args, **kwargs):
-    # if not self.id:
-    #     # Generate a unique alphanumeric ID
-    #     while True:
-    #         random_id = generate_random_id()
-    #         if not MyModel.objects.filter(id=random_id).exists():
-    #             self.id = random_id
-    #             break
-    # super().save(*args, **kwargs)
-    pass
+
+
+
+

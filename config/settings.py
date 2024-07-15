@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'Artworks',
-    # 'Auctions',
+    'Auctions',
     # 'Orders',
     'Users',
 
