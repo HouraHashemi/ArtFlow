@@ -14,21 +14,14 @@ class Category(models.Model):
         return "{}".format(self.name)
     
 
-class ArtworkSize(models.Model):
-    hight = models.PositiveIntegerField()
-    width = models.PositiveIntegerField()
-    depth = models.PositiveIntegerField()
-
-    def __str__(self) -> str:
-        return "{}x{}x{}".format(self.width, self.hight, self.depth)
-
-
 
 class Artwork(models.Model):
     artist = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    size = models.CharField(max_length=255, null=True)
-    # size = models.ForeignKey('ArtworkSize',on_delete=models.CASCADE, default=ArtworkSize(0,0,0))
+    
+    height = models.PositiveIntegerField(default=0)
+    width = models.PositiveIntegerField(default=0)
+    depth = models.PositiveIntegerField(default=0)
 
     description = models.TextField(max_length=500)
     image = models.ImageField(upload_to='artworks/', blank=True, null=True, validators=[validate_file_size])

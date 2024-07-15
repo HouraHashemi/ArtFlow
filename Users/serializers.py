@@ -9,12 +9,21 @@ from Artworks.models import Artwork
 
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
-        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name']
+        fields = ['id',
+                   'username',
+                     'password',
+                       'email',
+                         'first_name',
+                           'last_name']
 
 
 class UserSerializer(BaseUserSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+        fields = ['id',
+                   'username',
+                     'email',
+                       'first_name',
+                         'last_name']
 
 
 
@@ -23,7 +32,10 @@ class CustomerSerializer(serializers.ModelSerializer):
     user_artworks = SimpleArtworkSerializer(many=True, read_only=True)
     class Meta:
         model = Customer
-        fields = ['id', 'user_id', 'bio', 'user_artworks', ]
+        fields = ['id',
+                   'user_id',
+                     'bio',
+                       'user_artworks']
 
 
 

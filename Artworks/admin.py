@@ -17,21 +17,18 @@ admin.site.index_title = 'Admin Panel'
 
 
 
-
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
     actions = ['back_selling_state_to_defaulte']
-    list_display = ['id','title', 'image_thumb', 'selling_state_mode', 'floor_price', 'categories_type']
+    list_display = ['id', 'title', 'image_thumb', 'selling_state_mode', 'floor_price', 'categories_type']
     list_editable = ['floor_price']
     list_per_page = 10 
     list_select_related = ['artist']
     list_filter = ['categories', 'selling_state', 'created_at']
-
     # startswith for searching by first letter
     # adding i for making not sensitive to capital
     search_fields = ['artist__username__istartswith', 'title__istartswith']
     filter_horizontal = ['categories']
-
 
 
     @admin.display(ordering='selling_state_mode')
