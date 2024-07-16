@@ -16,8 +16,10 @@ class Category(models.Model):
 
 
 class Artwork(models.Model):
-    artist = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+   
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True) # 1 mean valid owner
     title = models.CharField(max_length=255)
+    artist = models.CharField(max_length=255) 
     
     height = models.PositiveIntegerField(default=0)
     width = models.PositiveIntegerField(default=0)
@@ -44,5 +46,5 @@ class Artwork(models.Model):
     
 
     class Meta:
-        ordering = ['artist']
+        ordering = ['owner']
 

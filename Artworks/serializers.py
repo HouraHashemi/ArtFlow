@@ -18,7 +18,7 @@ class ArtworkSerializer(serializers.ModelSerializer):
         slug_field='name'
     )
 
-    artist = serializers.StringRelatedField()
+    owner = serializers.StringRelatedField()
 
     size = serializers.SerializerMethodField(method_name='artwork_size')
     def artwork_size(self, artwork: Artwork):
@@ -27,6 +27,7 @@ class ArtworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artwork
         fields = ['id',
+                  'owner',
                    'artist',
                      'title',
                        'description',
@@ -37,7 +38,7 @@ class ArtworkSerializer(serializers.ModelSerializer):
                                  'categories',
                                    'size', 'height', 'width', 'depth',
                                    ]
-        read_only_fields = ['artist']  # Ensure artist field is read-only
+        read_only_fields = ['owner']  # Ensure artist field is read-only
         extra_kwargs = {
             'height': {'write_only': True},
             'width': {'write_only': True},
@@ -55,9 +56,10 @@ class SimpleArtworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artwork
         fields = ['id',
+                  'owner',
                    'artist',
                      'title',
                        'image',]
-        read_only_fields = ['artist']  # Ensure artist field is read-only
+        read_only_fields = ['owner']  # Ensure artist field is read-only
 
 

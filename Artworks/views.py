@@ -6,14 +6,14 @@ from .models import Artwork, Category
 from .serializers import ArtworkSerializer, CategorySerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerArtworkPermission
-
+from rest_framework.permissions import IsAuthenticated
 
 
 class ArtworkViewSet(viewsets.ModelViewSet):
-    queryset = Artwork.objects.select_related('artist').all()
+    queryset = Artwork.objects.select_related('owner').all()
     serializer_class = ArtworkSerializer
 
-    # custom filter | filterset_fields = ['artist','title','categories']
+    # custom filter | filterset_fields = ['owner','title','categories']
     filter_backends = [DjangoFilterBackend]
     filterset_class = ArtworkFilter
 
@@ -32,18 +32,19 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class CustomerArtworkViewSet(viewsets.ModelViewSet):
-    queryset = Artwork.objects.select_related('artist').all()
+    queryset = Artwork.objects.select_related('owner').all()
     serializer_class = ArtworkSerializer
 
     def get_queryset(self):
-        return Artwork.objects.filter(artist=self.request.user)
+        return Artwork.objects.filter(owner=self.request.user)
 
-    # custom filter | filterset_fields = ['artist','title','categories']
+    # custom filter | filterset_fields = ['owner','title','categories']
     filter_backends = [DjangoFilterBackend]
-    permission_classes = [ViewCustomerArtworkPermission]
+    # permission_classes = [ViewCustomerArtworkPermission]
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(artist=self.request.user)
+        serializer.save(owner=self.request.user)
 
     def perform_update(self, serializer):
-        serializer.save(artist=self.request.user)
+        serializer.save(owner=self.request.user)
